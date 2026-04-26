@@ -45,5 +45,17 @@ int main()
     cout << "Invalid time corrected to: ";
     t5.showTime();
 
+    // 9. Comparison operators
+    Time a(10, 20, 30);
+    Time b(12, 10, 15);
+
+    cout << "\nComparisons:\n";
+    cout << (a == b) << endl; // 0
+    cout << (a != b) << endl; // 1
+    cout << (a > b) << endl;  // 0
+    cout << (a < b) << endl;  // 1
+    cout << (a >= b) << endl; // 0
+    cout << (a <= b) << endl; // 1
+
     return 0;
 }

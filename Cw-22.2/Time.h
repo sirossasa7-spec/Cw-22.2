@@ -39,5 +39,13 @@ public:
     bool operator<(const Time& obj) const;
     bool operator>=(const Time& obj) const;
     bool operator<=(const Time& obj) const;
+    //--------- Assignment operators ---------	
+    Time& operator += (float s);	// add seconds
+    Time& operator -= (float s);
+    Time& operator += (int m);		// add minutes
+    Time& operator -= (int m);
+    Time& operator += (long h);	// add hours
+    Time& operator -= (long h);
+
 };
 

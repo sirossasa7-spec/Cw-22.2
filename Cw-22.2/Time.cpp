@@ -171,3 +171,33 @@ bool Time::operator<=(const Time& obj) const
 {
     return !(*this > obj);
 }
+
+Time& Time::operator+=(float s)
+{
+    // TODO: вставьте здесь оператор return
+}
+
+Time& Time::operator-=(float s)
+{
+    // TODO: вставьте здесь оператор return
+}
+
+Time& Time::operator+=(int m)
+{
+    // TODO: вставьте здесь оператор return
+}
+
+Time& Time::operator-=(int m)
+{
+    // TODO: вставьте здесь оператор return
+}
+
+Time& Time::operator+=(long h)
+{
+    // TODO: вставьте здесь оператор return
+}
+
+Time& Time::operator-=(long h)
+{
+    // TODO: вставьте здесь оператор return
+}
