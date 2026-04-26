@@ -174,30 +174,52 @@ bool Time::operator<=(const Time& obj) const
 
 Time& Time::operator+=(float s)
 {
-    // TODO: вставьте здесь оператор return
+    for (int i = 0; i < (int)s; i++)
+        tickTime();
+
+    return *this;
 }
 
 Time& Time::operator-=(float s)
 {
-    // TODO: вставьте здесь оператор return
+    for (int i = 0; i < (int)s; i++)
+        untickTime();
+
+    return *this;
 }
 
 Time& Time::operator+=(int m)
 {
-    // TODO: вставьте здесь оператор return
+    for (int i = 0; i < m; i++)
+        for (int j = 0; j < 60; j++)
+            tickTime();
+
+    return *this;
 }
 
 Time& Time::operator-=(int m)
 {
-    // TODO: вставьте здесь оператор return
+    for (int i = 0; i < m; i++)
+        for (int j = 0; j < 60; j++)
+            untickTime();
+
+    return *this;
 }
 
 Time& Time::operator+=(long h)
 {
-    // TODO: вставьте здесь оператор return
+    for (int i = 0; i < h; i++)
+        for (int j = 0; j < 3600; j++)
+            tickTime();
+
+    return *this;
 }
 
 Time& Time::operator-=(long h)
 {
-    // TODO: вставьте здесь оператор return
+    for (int i = 0; i < h; i++)
+        for (int j = 0; j < 3600; j++)
+            untickTime();
+
+    return *this;
 }
