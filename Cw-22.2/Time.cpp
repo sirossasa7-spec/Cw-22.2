@@ -3,7 +3,6 @@
 #include <ctime>
 using namespace std;
 
-// ---------- Constructors ----------
 Time_::Time_()
 {
     time_t current = time(0);
@@ -35,7 +34,7 @@ Time_::Time_(const Time_& obj)
 
 Time_& Time_::operator=(const Time_& obj)
 {
-    if (this != &obj)   // ✔ исправлено
+    if (this != &obj)   
     {
         hour = obj.hour;
         minutes = obj.minutes;
@@ -47,8 +46,6 @@ Time_& Time_::operator=(const Time_& obj)
 
 Time_::~Time_() {}
 
-
-// ---------- Setters / Getters ----------
 void Time_::setHour(int hour)
 {
     if (hour >= 0 && hour < 24)
@@ -80,8 +77,6 @@ void Time_::setFormat(bool format)
 
 bool Time_::getFormat() const { return format; }
 
-
-// ---------- Validation ----------
 bool Time_::valid() const
 {
     return (hour >= 0 && hour < 24) &&
@@ -89,8 +84,6 @@ bool Time_::valid() const
         (seconds >= 0 && seconds < 60);
 }
 
-
-// ---------- Time shift ----------
 void Time_::tickTime()
 {
     seconds++;
@@ -125,8 +118,6 @@ void Time_::untickTime()
         hour = 23;
 }
 
-
-// ---------- Output ----------
 void Time_::showTime() const
 {
     if (format)
@@ -147,8 +138,6 @@ void Time_::showTime() const
     }
 }
 
-
-// ---------- Comparisons ----------
 bool Time_::operator==(const Time_& obj) const& 
 {
     return this->hour == obj.hour && this->minutes == obj.minutes && this->seconds == obj.seconds && this->format == obj.format; 
@@ -173,7 +162,6 @@ bool Time_::operator<=(const Time_& obj) const&
     return !(*this > obj);
 }
 
-// ---------- += / -= ----------
 Time_& Time_::operator+=(float s)
 {
     for (int i = 0; i < (int)s; i++)
@@ -228,8 +216,6 @@ Time_& Time_::operator-=(long h)
     return *this;
 }
 
-
-// ---------- + / - ----------
 Time_ Time_::operator+(float s) const& 
 { 
     Time_ tmp = *this;
@@ -266,8 +252,6 @@ Time_ Time_::operator-(long h) const&
     tmp += h;
     return tmp; }
 
-
-// ---------- ++ / -- ----------
 Time_& Time_::operator++()
 {
     tickTime();
@@ -294,8 +278,6 @@ Time_ Time_::operator--(int)
     return tmp;
 }
 
-
-// ---------- Friends ----------
 Time_ operator+(int seconds, const Time_& a)
 {
     return a + seconds;
@@ -326,8 +308,6 @@ Time_ operator-(long hours, const Time_& a)
     return a - hours;
 }
 
-
-// ---------- IO ----------
 ostream& operator<<(ostream& os, const Time_& t)
 {
     os << (t.hour < 10 ? "0" : "") << t.hour << ":"
