@@ -4,12 +4,12 @@ using namespace std;
 
 int main()
 {
-	/*Time_ time1; 
-	time1.setFormat(true); 
-	time1.showTime();
-	cout << "======================================\n";
+	Time_ a; 
+	/*a.setFormat(true); 
+	a.showTime();
+	cout << "======================================\n";*/
 
-	Time_ a;
+	/*Time_ a;
 	Time_ b(23, 23, 12);
 	a.showTime();
 	cout << endl;
@@ -22,7 +22,13 @@ int main()
 	cout << "a >= b: " << boolalpha << (a >= b) << endl;
 	cout << "a <= b: " << boolalpha << (a <= b) << endl;*/
 
-
-
+	//a.showTime();
+	//a += 2,45; 
+	//a.showTime();
+	//a += 5;;
+	//a.showTime();
+	//a += 1l;
+	//a.showTime();
+	//cout << "======================================\n";
     return 0;
 }

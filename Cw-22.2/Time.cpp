@@ -180,31 +180,97 @@ bool Time_::operator<=(const Time_& obj) const&
 
 Time_& Time_::operator+=(float s)
 {
-	for (int )
+	for (int i = 0; i < s; i++) {
+		tickTime();
+	}
+	return *this;
 }
 
 Time_& Time_::operator-=(float s)
 {
-	// TODO: вставьте здесь оператор return
+	for (int i = 0; i < s; i++) {
+		untickTime();
+	}
+	return *this;
 }
 
 Time_& Time_::operator+=(int m)
 {
-	// TODO: вставьте здесь оператор return
+	this->minutes += m;
+	while (this->minutes >= 60) {
+		this->minutes -= 60;
+		this->hour++;
+	}
+		return *this;
 }
 
 Time_& Time_::operator-=(int m)
 {
-	// TODO: вставьте здесь оператор return
+	this->minutes -= m;
+	while (this->minutes < 0) {
+		this->minutes += 60;
+		this->hour--;
+	}
+	return *this;
 }
 
 Time_& Time_::operator+=(long h)
 {
-	// TODO: вставьте здесь оператор return
+	this->hour += h;
+	while (this->hour >= 24) {
+		this->hour -= 24;
+	}
+	return *this;
 }
 
 Time_& Time_::operator-=(long h)
 {
-	// TODO: вставьте здесь оператор return
+	this->hour -= h;
+	while (this->hour < 0) {
+		this->hour += 24;
+	}
+	return *this;
+}
+
+Time_ Time_::operator+(float s) const&
+{
+	Time_ tmp = *this;
+	tmp += s;
+	return tmp;
+}
+
+Time_ Time_::operator-(float s) const&
+{
+	Time_ tmp = *this;
+	tmp -= s;
+	return tmp;
+}
+
+Time_ Time_::operator+(int m) const&
+{
+	Time_ tmp = *this;
+	tmp += m;
+	return tmp;
+}
+
+Time_ Time_::operator-(int m) const&
+{
+	Time_ tmp = *this;
+	tmp += m;
+	return tmp;
+}
+
+Time_ Time_::operator+(long h) const&
+{
+	Time_ tmp = *this;
+	tmp += h;
+	return tmp;
+}
+
+Time_ Time_::operator-(long h) const&
+{
+	Time_ tmp = *this;
+	tmp += h;
+	return tmp;
 }
 

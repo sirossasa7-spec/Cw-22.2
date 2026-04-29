@@ -44,5 +44,13 @@ public:
 	Time_& operator -= (int m);
 	Time_& operator += (long h);	// add hours
 	Time_& operator -= (long h);
+	//--------- Arithmetic operators ---------
+	Time_ operator + (float s)const&;	// add seconds
+	Time_ operator - (float s)const&;
+	Time_ operator + (int m)const&; // add minutes
+	Time_ operator - (int m)const&;
+	Time_ operator + (long h)const&; // add hours
+	Time_ operator - (long h)const&;
+
 
 };
