@@ -1,57 +1,33 @@
 #pragma once
+#include <ctime>
 #include <iostream>
 
-class Time
+using namespace std;
+class Time_
 {
-    int hour;
-    int minutes;
-    int seconds;
-    bool format; // true = 24h, false = 12h
+	int hour;
+	int minutes;
+	int seconds;
+	bool format;// true = utc (24-hours),    false = am/pm (12-hours), 
 
 public:
-    Time();
-    Time(int hour, int minutes, int seconds, bool format = true);
-    Time(const Time& obj);
-    Time& operator=(const Time& obj);
-    ~Time();
+	Time_(); // Current local time
+	Time_(int hour, int minutes, int seconds, bool format = true);
+	Time_(const Time_& obj); //Визначити: чи потрібен Конструктор Копіювання?
+	Time_& operator = (const Time_& obj); // Визначити: чи потрібен Оператор Присвоювання?
+	~Time_(); // Визначити: чи потрібен Деструктор?
 
-    void setHour(int hour);
-    int getHour() const;
+	void setHour(int hour);
+	int getHour()const;
+	void setMinutes(int minutes);
+	int getMinutes()const;
+	void setSeconds(int seconds);
+	int getSeconds()const;
+	void setFormat(bool format);
+	bool getFormat()const;
 
-    void setMinutes(int minutes);
-    int getMinutes() const;
-
-    void setSeconds(int seconds);
-    int getSeconds() const;
-
-    void setFormat(bool format);
-    bool getFormat() const;
-
-    bool valid() const;
-    void tickTime();
-    void untickTime();
-    void showTime() const;
-
-    // operators
-    bool operator==(const Time& obj) const;
-    bool operator!=(const Time& obj) const;
-    bool operator>(const Time& obj) const;
-    bool operator<(const Time& obj) const;
-    bool operator>=(const Time& obj) const;
-    bool operator<=(const Time& obj) const;
-    //--------- Assignment operators ---------	
-    Time& operator += (float s);	// add seconds
-    Time& operator -= (float s);
-    Time& operator += (int m);		// add minutes
-    Time& operator -= (int m);
-    Time& operator += (long h);	// add hours
-    Time& operator -= (long h);
-    //--------- Arithmetic operators ---------
-    Time operator + (float s)const&;	// add seconds 
-    Time operator - (float s)const&;
-    Time operator + (int m)const&; // add minutes 
-    Time operator - (int m)const&;
-    Time operator + (long h)const&; // add hours 
-    Time operator - (long h)const&;
+	bool valid()const; //time check
+	void tickTime(); //every tick add one second
+	void untickTime(); //every tick remove one second
+	void showTime()const; //show time by the format
 };
-

@@ -1,225 +1,146 @@
 #include "Time.h"
-#include <ctime>
-
+#include <iostream>
 using namespace std;
-
-// Конструктор по умолчанию
-Time::Time()
+Time_::Time_()
 {
-    time_t now = time(0);
-    tm local{};
-
-#ifdef _WIN32
-    localtime_s(&local, &now);
-#else
-    local = *localtime(&now);
-#endif
-
-    hour = local.tm_hour;
-    minutes = local.tm_min;
-    seconds = local.tm_sec;
-    format = true;
+	tm* info = new tm;
+	auto curent = time(0);	
+	localtime_s(info, &curent);
+	hour = info->tm_hour;
+	minutes = info->tm_min;
+	seconds = info->tm_sec;
+	format = true;
+	delete info;
 }
 
-Time::Time(int h, int m, int s, bool f)
+Time_::Time_(int hour, int minutes, int seconds, bool format)
 {
-    hour = h;
-    minutes = m;
-    seconds = s;
-    format = f;
-
-    if (!valid())
-        hour = minutes = seconds = 0;
+	this->hour = hour;
+	this-> minutes = minutes;
+	this-> seconds = seconds;
+	this-> format = format;
 }
 
-Time::Time(const Time& obj)
+Time_::Time_(const Time_& obj)
 {
-    hour = obj.hour;
-    minutes = obj.minutes;
-    seconds = obj.seconds;
-    format = obj.format;
+	hour = obj.hour;
+	minutes = obj.minutes;
+	seconds = obj.seconds;
+	format = obj.format;
 }
 
-Time& Time::operator=(const Time& obj)
+
+Time_& Time_::operator=(const Time_& obj)
 {
-    if (this != &obj)
-    {
-        hour = obj.hour;
-        minutes = obj.minutes;
-        seconds = obj.seconds;
-        format = obj.format;
-    }
-    return *this;
+	if (this == &obj) {
+		hour = obj.hour;
+		minutes = obj.minutes;
+		seconds = obj.seconds;
+		format = obj.format;
+	}return *this;
 }
 
-Time::~Time() {}
-
-// SET / GET
-void Time::setHour(int h) { hour = h; }
-int Time::getHour() const { return hour; }
-
-void Time::setMinutes(int m) { minutes = m; }
-int Time::getMinutes() const { return minutes; }
-
-void Time::setSeconds(int s) { seconds = s; }
-int Time::getSeconds() const { return seconds; }
-
-void Time::setFormat(bool f) { format = f; }
-bool Time::getFormat() const { return format; }
-
-// Проверка
-bool Time::valid() const
+Time_::~Time_()
 {
-    return (hour >= 0 && hour < 24 &&
-        minutes >= 0 && minutes < 60 &&
-        seconds >= 0 && seconds < 60);
+
 }
 
-// +1 секунда
-void Time::tickTime()
+void Time_::setHour(int hour)
 {
-    seconds++;
-    if (seconds >= 60)
-    {
-        seconds = 0;
-        minutes++;
-        if (minutes >= 60)
-        {
-            minutes = 0;
-            hour++;
-            if (hour >= 24)
-                hour = 0;
-        }
-    }
+	if (hour >= 0 && hour < 24)
+		this->hour = hour;
 }
 
-// -1 секунда
-void Time::untickTime()
+int Time_::getHour() const
 {
-    seconds--;
-    if (seconds < 0)
-    {
-        seconds = 59;
-        minutes--;
-        if (minutes < 0)
-        {
-            minutes = 59;
-            hour--;
-            if (hour < 0)
-                hour = 23;
-        }
-    }
+	return hour;
 }
 
-// Вывод
-void Time::showTime() const
+void Time_::setMinutes(int minutes)
 {
-    if (format)
-    {
-        cout << (hour < 10 ? "0" : "") << hour << ":"
-            << (minutes < 10 ? "0" : "") << minutes << ":"
-            << (seconds < 10 ? "0" : "") << seconds << endl;
-    }
-    else
-    {
-        int h = hour % 12;
-        if (h == 0) h = 12;
-
-        cout << (h < 10 ? "0" : "") << h << ":"
-            << (minutes < 10 ? "0" : "") << minutes << ":"
-            << (seconds < 10 ? "0" : "") << seconds
-            << (hour < 12 ? " AM" : " PM") << endl;
-    }
+	if (minutes >= 0 && minutes < 60)
+		this->minutes = minutes;
 }
 
-// ===== ОПЕРАТОРЫ (ВНЕ showTime!) =====
-
-bool Time::operator==(const Time& obj) const
+int Time_::getMinutes() const
 {
-    return hour == obj.hour &&
-        minutes == obj.minutes &&
-        seconds == obj.seconds;
+	return minutes;
 }
 
-bool Time::operator!=(const Time& obj) const
+void Time_::setSeconds(int seconds)
 {
-    return !(*this == obj);
+	if (seconds >= 0 && seconds < 60)
+		this->seconds = seconds;
 }
 
-bool Time::operator>(const Time& obj) const
+int Time_::getSeconds() const
 {
-    if (hour != obj.hour)
-        return hour > obj.hour;
-
-    if (minutes != obj.minutes)
-        return minutes > obj.minutes;
-
-    return seconds > obj.seconds;
+	return seconds;
 }
 
-bool Time::operator<(const Time& obj) const
+void Time_::setFormat(bool format)
 {
-    return obj > *this;
+	this->format = format;
 }
 
-bool Time::operator>=(const Time& obj) const
+bool Time_::getFormat() const
 {
-    return !(*this < obj);
+	return format;
 }
 
-bool Time::operator<=(const Time& obj) const
+bool Time_::valid() const
 {
-    return !(*this > obj);
+	return (hour >= 0 && hour < 24) && (minutes >= 0 && minutes < 60) && (seconds >= 0 && seconds < 60);
 }
 
-Time& Time::operator+=(float s)
+void Time_::tickTime()
 {
-    for (int i = 0; i < (int)s; i++)
-        tickTime();
-
-    return *this;
+	seconds++;
+	if (seconds >= 60) {
+		seconds = 0;
+		minutes++;
+	}
+	if (minutes >= 60) {
+		minutes = 0;
+		hour++;
+	}
+	if (hour >= 24) {
+		hour = 0;
+	}
 }
 
-Time& Time::operator-=(float s)
+void Time_::untickTime()
 {
-    for (int i = 0; i < (int)s; i++)
-        untickTime();
-
-    return *this;
+	seconds--;
+	if (seconds < 0) {
+		seconds = 59;
+		minutes--;
+	}
+	if (minutes < 0) {
+		minutes = 59;
+		hour--;
+	}
+	if (hour < 0) {
+		hour = 23;
+	}
 }
 
-Time& Time::operator+=(int m)
+void Time_::showTime() const
 {
-    for (int i = 0; i < m; i++)
-        for (int j = 0; j < 60; j++)
-            tickTime();
+	if (format) // 24-hour
+	{
+		cout << (hour < 10 ? "0" : "") << hour << ":"
+			<< (minutes < 10 ? "0" : "") << minutes << ":"
+			<< (seconds < 10 ? "0" : "") << seconds << endl;
+	}
+	else // 12-hour
+	{
+		int displayHour = hour % 12;
+		if (displayHour == 0) displayHour = 12;
 
-    return *this;
-}
-
-Time& Time::operator-=(int m)
-{
-    for (int i = 0; i < m; i++)
-        for (int j = 0; j < 60; j++)
-            untickTime();
-
-    return *this;
-}
-
-Time& Time::operator+=(long h)
-{
-    for (int i = 0; i < h; i++)
-        for (int j = 0; j < 3600; j++)
-            tickTime();
-
-    return *this;
-}
-
-Time& Time::operator-=(long h)
-{
-    for (int i = 0; i < h; i++)
-        for (int j = 0; j < 3600; j++)
-            untickTime();
-
-    return *this;
+		cout << (displayHour < 10 ? "0" : "") << displayHour << ":"
+			<< (minutes < 10 ? "0" : "") << minutes << ":"
+			<< (seconds < 10 ? "0" : "") << seconds
+			<< (hour < 12 ? " AM" : " PM") << endl;
+	}
 }
