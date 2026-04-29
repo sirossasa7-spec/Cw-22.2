@@ -144,3 +144,67 @@ void Time_::showTime() const
 			<< (hour < 12 ? " AM" : " PM") << endl;
 	}
 }
+
+bool Time_::operator==(const Time_& obj) const&
+{
+	return this->hour == obj.hour && this->minutes == obj.minutes && this->seconds == obj.seconds && this->format == obj.format;
+}
+
+bool Time_::operator!=(const Time_& obj) const&
+{
+	return !(*this == obj);
+}
+
+bool Time_::operator>(const Time_& obj) const&
+{
+	if (hour > obj.hour) return true;
+	if (hour == obj.hour && minutes > obj.minutes) return true;
+	if (hour == obj.hour && minutes == obj.minutes && seconds > obj.seconds) return true;
+	return false;
+}
+
+bool Time_::operator<(const Time_& obj) const&
+{
+	return !(*this > obj) && !(*this == obj);
+}
+
+bool Time_::operator>=(const Time_& obj) const&
+{
+	return (*this > obj) || (*this == obj);
+}
+
+bool Time_::operator<=(const Time_& obj) const&
+{
+	return !(*this > obj);
+}
+
+Time_& Time_::operator+=(float s)
+{
+	for (int )
+}
+
+Time_& Time_::operator-=(float s)
+{
+	// TODO: вставьте здесь оператор return
+}
+
+Time_& Time_::operator+=(int m)
+{
+	// TODO: вставьте здесь оператор return
+}
+
+Time_& Time_::operator-=(int m)
+{
+	// TODO: вставьте здесь оператор return
+}
+
+Time_& Time_::operator+=(long h)
+{
+	// TODO: вставьте здесь оператор return
+}
+
+Time_& Time_::operator-=(long h)
+{
+	// TODO: вставьте здесь оператор return
+}
+

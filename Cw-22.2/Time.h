@@ -30,4 +30,19 @@ public:
 	void tickTime(); //every tick add one second
 	void untickTime(); //every tick remove one second
 	void showTime()const; //show time by the format
+	//--------- Comparison operators ---------
+	bool operator == (const Time_& obj)const&;
+	bool operator != (const Time_& obj)const&;
+	bool operator > (const Time_& obj)const&;
+	bool operator < (const Time_& obj)const&;
+	bool operator >= (const Time_& obj)const&;
+	bool operator <= (const Time_& obj)const&;
+	//--------- Assignment operators ---------	
+	Time_& operator += (float s);	// add seconds
+	Time_& operator -= (float s);
+	Time_& operator += (int m);		// add minutes
+	Time_& operator -= (int m);
+	Time_& operator += (long h);	// add hours
+	Time_& operator -= (long h);
+
 };
