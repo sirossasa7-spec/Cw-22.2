@@ -1,4 +1,5 @@
 ﻿#include "Time.h"
+#include "Bus.h"
 #include <iostream>
 using namespace std;
 
@@ -30,6 +31,12 @@ int main()
 	//a += 1l;
 	//a.showTime();
 	//cout << "======================================\n";
+	Time_ start(6, 0, 0, true);
+	Time_ end(11, 0, 0, true);
 
+	Bus b(start, end, 30, 10);
+	b.showSchedule();
+
+	return 0;
     return 0;
 }
